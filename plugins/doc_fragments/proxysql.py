@@ -59,3 +59,26 @@ options:
     type: bool
     default: true
 '''
+
+    # Standard attribute descriptions. Each module sets its own support level.
+    ATTRIBUTES = r'''
+options: {}
+attributes:
+  check_mode:
+    description:
+      - Can run in check mode and return changed status prediction without modifying the target.
+  idempotent:
+    description:
+      - When run twice in a row outside check mode, with the same arguments, the second invocation indicates no change.
+      - This assumes that the system controlled/queried by the module has not changed in a relevant way.
+'''
+
+    # For modules that never modify state, such as info modules
+    IDEMPOTENT_NOT_MODIFY_STATE = r'''
+options: {}
+attributes:
+  idempotent:
+    support: full
+    details:
+      - This action does not modify state.
+'''

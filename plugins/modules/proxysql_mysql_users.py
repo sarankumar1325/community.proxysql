@@ -108,14 +108,16 @@ options:
 extends_documentation_fragment:
 - community.proxysql.proxysql.managing_config
 - community.proxysql.proxysql.connectivity
-notes:
-- Supports C(check_mode).
+- community.proxysql.proxysql.attributes
 attributes:
-  idempotent:
-    description:
-      - When run twice in a row outside check mode, with the same arguments, the second invocation indicates no change.
-      - This assumes that the system controlled/queried by the module has not changed in a relevant way.
+  check_mode:
     support: full
+  idempotent:
+    support: partial
+    details:
+      - With I(encrypt_password=true) and I(encryption_method=caching_sha2_password),
+        the module is only idempotent when I(salt) is set. Without it, every run
+        generates a new random salt and reports a change.
 '''
 
 EXAMPLES = '''
